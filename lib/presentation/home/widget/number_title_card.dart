@@ -22,14 +22,22 @@ class NumberTitleCard extends StatelessWidget {
         kHeight,
         LimitedBox(
           maxHeight: 200,
-          child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: List.generate(
-                  10,
-                  (index) => NumberCard(
-                        imageUrl: posterList[index],
-                        index: index,
-                      ))),
+          child: ListView(scrollDirection: Axis.horizontal, children: [
+            for (int index = 0; index < 10; index++)
+              NumberCard(
+                index: index,
+                imageUrl: posterList[index],
+              ),
+          ]
+
+              //  List.generate(
+              //   10,
+              //   (index) => NumberCard(
+              //     imageUrl: posterList[index],
+              //     index: index,
+              //   ),
+              // ),
+              ),
         )
       ],
     );
