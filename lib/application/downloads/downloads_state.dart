@@ -11,6 +11,8 @@ class DownloadsState with _$DownloadsState {
 
   factory DownloadsState.inital() {
     return DownloadsState(
-        isLoading: false, downloadsFailureSucessOption: None(), downloads: []);
+        isLoading: false,
+        downloadsFailureSucessOption: const None(),
+        downloads: []);
   }
 }
