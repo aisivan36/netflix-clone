@@ -1,1 +1,3 @@
-const String apiKey = 'bb224fad35205045f3294b22ead58630';
+/// TODO Change this api to your TMDB api account
+
+const String apiKey = 'here is';
