@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,37 +5,25 @@ import 'package:netflix_clone/application/home/home_bloc.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/core/constants.dart';
 import 'package:netflix_clone/presentation/home/widget/background_card.dart';
-import 'package:netflix_clone/presentation/home/widget/custom_button_widget.dart';
-import 'package:netflix_clone/presentation/home/widget/number_card.dart';
+
 import 'package:netflix_clone/presentation/home/widget/number_title_card.dart';
-import 'package:netflix_clone/presentation/widget/main_title.dart';
+
 import 'package:netflix_clone/presentation/widget/main_title_card.dart';
 
-// ignore: must_be_immutable
-class ScreenHome extends StatefulWidget {
+class ScreenHome extends StatelessWidget {
   const ScreenHome({Key? key}) : super(key: key);
 
   @override
-  State<ScreenHome> createState() => _ScreenHomeState();
-}
-
-class _ScreenHomeState extends State<ScreenHome> {
-  ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
-
-  bool isTvLoaded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
-      isTvLoaded = true;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
+
+    bool isTvLoaded = false;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<HomeBloc>(context).add(const GetHomeScreenData());
+
+      Future.delayed(const Duration(seconds: 1), () {
+        isTvLoaded = true;
+      });
     });
     return Scaffold(
         body: ValueListenableBuilder(
