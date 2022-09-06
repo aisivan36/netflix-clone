@@ -15,10 +15,26 @@ import 'package:netflix_clone/presentation/widget/main_title.dart';
 import 'package:netflix_clone/presentation/widget/main_title_card.dart';
 
 // ignore: must_be_immutable
-class ScreenHome extends StatelessWidget {
-  ScreenHome({Key? key}) : super(key: key);
+class ScreenHome extends StatefulWidget {
+  const ScreenHome({Key? key}) : super(key: key);
 
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
   ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
+
+  bool isTvLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 1), () {
+      isTvLoaded = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -102,6 +118,8 @@ class ScreenHome extends StatelessWidget {
                           }).toList();
                           // tv shows
                           final _top10tvShows = state.trendingTvList.map((m) {
+                            print(
+                                'Cheast things $imageAppendUrl${m.posterPath}');
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
                           // get id pase year
@@ -125,10 +143,13 @@ class ScreenHome extends StatelessWidget {
                                 posterList: _trending,
                               ),
                               kHeight,
-                              NumberTitleCard(
-                                posterList: _top10tvShows,
-                                title: "Top 10 TV shows in india today",
-                              ),
+
+                              // TODO Watch this
+                              if (isTvLoaded == true)
+                                NumberTitleCard(
+                                  posterList: _top10tvShows,
+                                  title: "Top 10 TV shows in india today",
+                                ),
                               kHeight,
                               MainTitleCard(
                                 id: _trendsId,
