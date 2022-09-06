@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,90 +63,90 @@ class ScreenHome extends StatelessWidget {
                             ));
                           }
                           // released past year
-                          final _releasedPastYear =
+                          final releasedPastYear =
                               state.pastYearMovieList.map((m) {
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
                           // get id pase year
-                          final _releasedPastYearId =
+                          final releasedPastYearId =
                               state.pastYearMovieList.map((m) {
                             return m.id;
                           }).toList();
                           // _releasedPastYearId.shuffle();
                           // trending
-                          final _trending = state.trendingMovieList.map((m) {
+                          final trending = state.trendingMovieList.map((m) {
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
-                          _trending.shuffle();
+                          trending.shuffle();
                           // get id trendimg
-                          final _trendingId = state.trendingMovieList.map((m) {
+                          final trendingId = state.trendingMovieList.map((m) {
                             return m.id;
                           }).toList();
-                          _trendingId.shuffle();
+                          trendingId.shuffle();
                           //  trendse drama
-                          final _trendse = state.tenseDramaMovieList.map((m) {
+                          final trendse = state.tenseDramaMovieList.map((m) {
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
-                          _trendse.shuffle();
+                          trendse.shuffle();
                           // get id trendse
-                          final _trendsId = state.tenseDramaMovieList.map((m) {
+                          final trendsId = state.tenseDramaMovieList.map((m) {
                             return m.id;
                           }).toList();
                           // south indian movie
-                          final _southIndia =
+                          final southIndia =
                               state.southIndianMovieList.map((m) {
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
                           // get id pase year
-                          final _southIndiaId =
+                          final southIndiaId =
                               state.southIndianMovieList.map((m) {
                             return m.id;
                           }).toList();
                           // tv shows
-                          final _top10tvShows = state.trendingTvList.map((m) {
+                          final top10tvShows = state.trendingTvList.map((m) {
                             print(
                                 'Cheast things $imageAppendUrl${m.posterPath}');
                             return '$imageAppendUrl${m.posterPath}';
                           }).toList();
                           // get id pase year
-                          final _top10tvShowsId = state.trendingTvList.map((m) {
+                          final top10tvShowsId = state.trendingTvList.map((m) {
                             return m.id;
                           }).toList();
-                          print(state.trendingMovieList.length);
+                          if (kDebugMode) print(state.trendingMovieList.length);
                           return ListView(
                             children: [
                               const BackgroundCard(),
                               kHeight,
                               MainTitleCard(
-                                id: _releasedPastYearId,
+                                id: releasedPastYearId,
                                 title: "Released in the past year",
-                                posterList: _releasedPastYear,
+                                posterList: releasedPastYear,
                               ),
                               kHeight,
                               MainTitleCard(
-                                id: _trendingId,
+                                id: trendingId,
                                 title: "Trending Now",
-                                posterList: _trending,
+                                posterList: trending,
                               ),
                               kHeight,
 
-                              // TODO Watch this
+                              // Lazy load
                               if (isTvLoaded == true)
                                 NumberTitleCard(
-                                  posterList: _top10tvShows,
+                                  posterList: top10tvShows,
                                   title: "Top 10 TV shows in india today",
                                 ),
                               kHeight,
                               MainTitleCard(
-                                id: _trendsId,
+                                id: trendsId,
                                 title: "Tense Dramas",
-                                posterList: _trendse,
+                                posterList: trendse,
                               ),
                               kHeight,
                               MainTitleCard(
-                                id: _southIndiaId,
+                                id: southIndiaId,
                                 title: "South Indian Cinema",
-                                posterList: _southIndia,
+                                posterList: southIndia,
                               ),
                             ],
                           );
